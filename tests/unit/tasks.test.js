@@ -1,6 +1,13 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { createTask, isValidTitle, loadTasks, saveTasks, updateTaskTitle } from '../../src/tasks.js';
+import {
+  createTask,
+  isValidTitle,
+  loadTasks,
+  saveTasks,
+  toggleTaskCompleted,
+  updateTaskTitle,
+} from '../../src/tasks.js';
 
 function memoryStorage() {
   const data = new Map();
@@ -55,4 +62,13 @@ test('updateTaskTitle lanza con título vacío y no modifica nada', () => {
   const tasks = [createTask('Uno')];
   assert.throws(() => updateTaskTitle(tasks, tasks[0].id, '   '));
   assert.equal(tasks[0].titulo, 'Uno');
+});
+
+test('toggleTaskCompleted alterna solo la tarea indicada', () => {
+  const [a, b] = [createTask('Uno'), createTask('Dos')];
+  const once = toggleTaskCompleted([a, b], a.id);
+  assert.deepEqual(once, [{ ...a, completada: true }, b]);
+  assert.equal(a.completada, false);
+  const twice = toggleTaskCompleted(once, a.id);
+  assert.deepEqual(twice, [a, b]);
 });

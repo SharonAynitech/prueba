@@ -26,6 +26,10 @@ export function updateTaskTitle(tasks, id, titulo) {
   return tasks.map((task) => (task.id === id ? { ...task, titulo: titulo.trim() } : task));
 }
 
+export function toggleTaskCompleted(tasks, id) {
+  return tasks.map((task) => (task.id === id ? { ...task, completada: !task.completada } : task));
+}
+
 export function loadTasks(storage = globalThis.localStorage) {
   try {
     const parsed = JSON.parse(storage.getItem(STORAGE_KEY) ?? '[]');
