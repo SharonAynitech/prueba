@@ -19,6 +19,12 @@ npm install
 npm run build && npm start   # http://localhost:8080
 ```
 
+## Tests unitarios
+
+```sh
+npm run test:unit
+```
+
 ## Tests E2E
 
 Con la app levantada en el puerto 8080:
