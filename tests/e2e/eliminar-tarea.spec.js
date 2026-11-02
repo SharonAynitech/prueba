@@ -13,7 +13,11 @@ test('criterio 0: al confirmar la eliminación la tarea desaparece de inmediato'
   await crearTarea(page, 'Pagar luz');
 
   const item = page.getByTestId('task-item').filter({ hasText: 'Comprar leche' });
-  await item.getByRole('button', { name: 'Eliminar' }).click();
+  // El botón es solo un icono: sin texto visible, pero con nombre accesible.
+  const deleteButton = item.getByRole('button', { name: 'Eliminar' });
+  await expect(deleteButton).toHaveText('');
+  await expect(deleteButton.locator('svg')).toBeVisible();
+  await deleteButton.click();
 
   const dialog = page.getByRole('dialog', { name: '¿Eliminar la tarea?' });
   await expect(dialog).toBeVisible();
@@ -29,7 +33,14 @@ test('criterio 0: al confirmar la eliminación la tarea desaparece de inmediato'
 
   await expect(dialog).toBeHidden();
   await expect(page.getByTestId('task-title')).toHaveText(['Pagar luz']);
-  await expect(page.getByRole('status')).toHaveText('Eliminada');
+
+  // Snackbar flotante con 'Tarea eliminada'; no queda el texto 'Eliminada' suelto en la página.
+  const snackbar = page.getByTestId('snackbar');
+  await expect(snackbar).toBeVisible();
+  await expect(snackbar).toHaveText('Tarea eliminada');
+  await expect(snackbar).toHaveCSS('position', 'fixed');
+  await expect(page.getByText('Eliminada', { exact: true })).toHaveCount(0);
+  await expect(snackbar).toBeHidden({ timeout: 6000 });
 });
 
 test('criterio 1: la tarea eliminada no vuelve al recargar', async ({ page }) => {
