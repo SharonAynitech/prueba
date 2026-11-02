@@ -390,9 +390,13 @@
               "selector": "[data-testid=delete-dialog]"
             },
             {
+              "action": "visible",
+              "selector": "[data-testid=snackbar]"
+            },
+            {
               "action": "text",
-              "selector": "[role=status]",
-              "value": "Eliminada"
+              "selector": "[data-testid=snackbar]",
+              "value": "Tarea eliminada"
             }
           ]
         },

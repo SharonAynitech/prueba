@@ -140,12 +140,13 @@ export default function TaskItem({ task, onRename, onToggle, onDelete }) {
           </button>
           <button
             type="button"
-            className="secundario"
+            className="secundario icono"
             data-testid="task-delete"
+            aria-label="Eliminar"
+            title="Eliminar"
             onClick={() => onDelete(task)}
           >
             <TrashIcon />
-            Eliminar
           </button>
         </div>
       )}

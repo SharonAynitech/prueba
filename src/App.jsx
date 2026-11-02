@@ -22,7 +22,7 @@ export default function App() {
 
   useEffect(() => {
     if (!notice) return undefined;
-    const timer = setTimeout(() => setNotice(null), 2000);
+    const timer = setTimeout(() => setNotice(null), 3000);
     return () => clearTimeout(timer);
   }, [notice]);
 
@@ -53,7 +53,7 @@ export default function App() {
   }
 
   function handleDelete(id) {
-    commit(deleteTask(tasks, id), 'Eliminada');
+    commit(deleteTask(tasks, id), 'Tarea eliminada');
     setPendingDelete(null);
   }
 
@@ -104,9 +104,14 @@ export default function App() {
         </ul>
       </section>
 
-      <p className="estado" role="status" aria-live="polite">
-        {notice?.text ?? ''}
-      </p>
+      {/* La región viva existe siempre para que los lectores de pantalla anuncien cada aviso. */}
+      <div role="status" aria-live="polite">
+        {notice && (
+          <p key={notice.id} className="snackbar" data-testid="snackbar">
+            {notice.text}
+          </p>
+        )}
+      </div>
 
       <ConfirmDelete
         task={pendingDelete}
