@@ -20,7 +20,7 @@ function PencilIcon() {
   );
 }
 
-export default function TaskItem({ task, onRename }) {
+export default function TaskItem({ task, onRename, onToggle }) {
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(task.titulo);
   const [error, setError] = useState('');
@@ -54,7 +54,11 @@ export default function TaskItem({ task, onRename }) {
   }
 
   return (
-    <li data-testid="task-item">
+    <li
+      data-testid="task-item"
+      data-completed={task.completada ? 'true' : 'false'}
+      className={task.completada ? 'completada' : undefined}
+    >
       {editing ? (
         <form className="edicion" onSubmit={handleSubmit} noValidate>
           <div className="fila">
@@ -90,6 +94,13 @@ export default function TaskItem({ task, onRename }) {
         </form>
       ) : (
         <div className="tarea">
+          <input
+            type="checkbox"
+            data-testid="task-toggle"
+            aria-label={`Completada: ${task.titulo}`}
+            checked={task.completada}
+            onChange={() => onToggle(task.id)}
+          />
           <div className="tarea-texto">
             <span data-testid="task-title" className="titulo">
               {task.titulo}

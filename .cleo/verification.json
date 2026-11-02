@@ -237,6 +237,107 @@
           ]
         }
       ]
+    },
+    "US-02-3": {
+      "criteria_digest": "fbe329029878d77381308ea71863a5624abd9494e10ecfa26c6b2c7b8af4b66d",
+      "cases": [
+        {
+          "criterion_index": 0,
+          "steps": [
+            {
+              "action": "goto",
+              "path": "/"
+            },
+            {
+              "action": "fill",
+              "selector": "input[name=titulo]",
+              "value": "Comprar leche"
+            },
+            {
+              "action": "click",
+              "selector": "form.crear button[type=submit]"
+            },
+            {
+              "action": "text",
+              "selector": "[data-testid=task-title]",
+              "value": "Comprar leche"
+            },
+            {
+              "action": "count",
+              "selector": "[data-testid=task-item][data-completed=true]",
+              "value": 0
+            },
+            {
+              "action": "check",
+              "selector": "[data-testid=task-item] [data-testid=task-toggle]"
+            },
+            {
+              "action": "count",
+              "selector": "[data-testid=task-item][data-completed=true]",
+              "value": 1
+            },
+            {
+              "action": "visible",
+              "selector": "[data-testid=task-item][data-completed=true] [data-testid=task-title]"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "steps": [
+            {
+              "action": "goto",
+              "path": "/"
+            },
+            {
+              "action": "fill",
+              "selector": "input[name=titulo]",
+              "value": "Comprar leche"
+            },
+            {
+              "action": "click",
+              "selector": "form.crear button[type=submit]"
+            },
+            {
+              "action": "text",
+              "selector": "[data-testid=task-title]",
+              "value": "Comprar leche"
+            },
+            {
+              "action": "count",
+              "selector": "[data-testid=task-item][data-completed=true]",
+              "value": 0
+            },
+            {
+              "action": "check",
+              "selector": "[data-testid=task-item] [data-testid=task-toggle]"
+            },
+            {
+              "action": "count",
+              "selector": "[data-testid=task-item][data-completed=true]",
+              "value": 1
+            },
+            {
+              "action": "goto",
+              "path": "/"
+            },
+            {
+              "action": "count",
+              "selector": "[data-testid=task-item][data-completed=true]",
+              "value": 1
+            },
+            {
+              "action": "count",
+              "selector": "[data-testid=task-toggle]:checked",
+              "value": 1
+            },
+            {
+              "action": "visible",
+              "selector": "[data-testid=task-item][data-completed=true] [data-testid=task-title]"
+            }
+          ]
+        }
+      ]
     }
   }
 }

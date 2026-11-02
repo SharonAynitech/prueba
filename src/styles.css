@@ -7,6 +7,7 @@
   --color-accent-hover: #444444;
   --color-focus: #000000;
   --color-error: #d32f2f;
+  --color-completed: #999999;
   --radius-md: 8px;
   --space-2: 8px;
   --space-4: 16px;
@@ -161,6 +162,25 @@ button:focus-visible {
 
 .tareas .titulo {
   overflow-wrap: anywhere;
+}
+
+.tarea input[type='checkbox'] {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--color-completed);
+  cursor: pointer;
+}
+
+.tarea input[type='checkbox']:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.completada .titulo {
+  color: var(--color-completed);
+  text-decoration: line-through;
 }
 
 .tareas time {

@@ -1,5 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { createTask, isValidTitle, loadTasks, saveTasks, updateTaskTitle } from './tasks.js';
+import {
+  createTask,
+  isValidTitle,
+  loadTasks,
+  saveTasks,
+  toggleTaskCompleted,
+  updateTaskTitle,
+} from './tasks.js';
 import TaskItem from './TaskItem.jsx';
 
 export default function App() {
@@ -32,6 +39,13 @@ export default function App() {
 
   function handleRename(id, nuevoTitulo) {
     const next = updateTaskTitle(tasks, id, nuevoTitulo);
+    saveTasks(next);
+    setTasks(next);
+    setSaved(true);
+  }
+
+  function handleToggle(id) {
+    const next = toggleTaskCompleted(tasks, id);
     saveTasks(next);
     setTasks(next);
     setSaved(true);
@@ -73,7 +87,12 @@ export default function App() {
         <h2 id="tareas-titulo">Tareas</h2>
         <ul data-testid="task-list">
           {tasks.map((task) => (
-            <TaskItem key={task.id} task={task} onRename={handleRename} />
+            <TaskItem
+              key={task.id}
+              task={task}
+              onRename={handleRename}
+              onToggle={handleToggle}
+            />
           ))}
         </ul>
       </section>
