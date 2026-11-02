@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { createTask, formatDate, isValidTitle, loadTasks, saveTasks } from './tasks.js';
+import { createTask, isValidTitle, loadTasks, saveTasks, updateTaskTitle } from './tasks.js';
+import TaskItem from './TaskItem.jsx';
 
 export default function App() {
   const [tasks, setTasks] = useState(() => loadTasks());
@@ -26,6 +27,13 @@ export default function App() {
     setTasks(next);
     setTitulo('');
     setError('');
+    setSaved(true);
+  }
+
+  function handleRename(id, nuevoTitulo) {
+    const next = updateTaskTitle(tasks, id, nuevoTitulo);
+    saveTasks(next);
+    setTasks(next);
     setSaved(true);
   }
 
@@ -65,14 +73,7 @@ export default function App() {
         <h2 id="tareas-titulo">Tareas</h2>
         <ul data-testid="task-list">
           {tasks.map((task) => (
-            <li key={task.id} data-testid="task-item">
-              <span data-testid="task-title" className="titulo">
-                {task.titulo}
-              </span>
-              <time data-testid="task-date" dateTime={task.fecha_creacion}>
-                {formatDate(task.fecha_creacion)}
-              </time>
-            </li>
+            <TaskItem key={task.id} task={task} onRename={handleRename} />
           ))}
         </ul>
       </section>
