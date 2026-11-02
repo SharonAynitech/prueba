@@ -445,7 +445,7 @@
             },
             {
               "action": "visible",
-              "selector": "[data-testid=task-list]"
+              "selector": "#tareas-titulo"
             },
             {
               "action": "count",
