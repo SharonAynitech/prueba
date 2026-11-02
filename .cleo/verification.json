@@ -338,6 +338,123 @@
           ]
         }
       ]
+    },
+    "US-02-4": {
+      "criteria_digest": "f386a43697344cdf4e07a78fca4e419d2989e7080798dee4a9e994a59139f764",
+      "cases": [
+        {
+          "criterion_index": 0,
+          "steps": [
+            {
+              "action": "goto",
+              "path": "/"
+            },
+            {
+              "action": "fill",
+              "selector": "input[name=titulo]",
+              "value": "Comprar leche"
+            },
+            {
+              "action": "click",
+              "selector": "form.crear button[type=submit]"
+            },
+            {
+              "action": "count",
+              "selector": "[data-testid=task-item]",
+              "value": 1
+            },
+            {
+              "action": "text",
+              "selector": "[data-testid=task-title]",
+              "value": "Comprar leche"
+            },
+            {
+              "action": "click",
+              "selector": "[data-testid=task-item] [data-testid=task-delete]"
+            },
+            {
+              "action": "visible",
+              "selector": "[data-testid=delete-dialog]"
+            },
+            {
+              "action": "click",
+              "selector": "[data-testid=confirm-delete]"
+            },
+            {
+              "action": "count",
+              "selector": "[data-testid=task-item]",
+              "value": 0
+            },
+            {
+              "action": "hidden",
+              "selector": "[data-testid=delete-dialog]"
+            },
+            {
+              "action": "text",
+              "selector": "[role=status]",
+              "value": "Eliminada"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "steps": [
+            {
+              "action": "goto",
+              "path": "/"
+            },
+            {
+              "action": "fill",
+              "selector": "input[name=titulo]",
+              "value": "Comprar leche"
+            },
+            {
+              "action": "click",
+              "selector": "form.crear button[type=submit]"
+            },
+            {
+              "action": "count",
+              "selector": "[data-testid=task-item]",
+              "value": 1
+            },
+            {
+              "action": "text",
+              "selector": "[data-testid=task-title]",
+              "value": "Comprar leche"
+            },
+            {
+              "action": "click",
+              "selector": "[data-testid=task-item] [data-testid=task-delete]"
+            },
+            {
+              "action": "visible",
+              "selector": "[data-testid=delete-dialog]"
+            },
+            {
+              "action": "click",
+              "selector": "[data-testid=confirm-delete]"
+            },
+            {
+              "action": "count",
+              "selector": "[data-testid=task-item]",
+              "value": 0
+            },
+            {
+              "action": "goto",
+              "path": "/"
+            },
+            {
+              "action": "visible",
+              "selector": "#tareas-titulo"
+            },
+            {
+              "action": "count",
+              "selector": "[data-testid=task-item]",
+              "value": 0
+            }
+          ]
+        }
+      ]
     }
   }
 }

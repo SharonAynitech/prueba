@@ -113,6 +113,45 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
+button.peligro {
+  background: var(--color-error);
+  border-color: var(--color-error);
+}
+
+button.peligro:hover {
+  background: #b71c1c;
+  border-color: #b71c1c;
+}
+
+.confirmar {
+  width: min(24rem, calc(100vw - 2 * var(--space-4)));
+  padding: var(--space-6);
+  color: var(--color-text-primary);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.confirmar::backdrop {
+  background: rgba(26, 26, 26, 0.3);
+}
+
+.confirmar h2 {
+  font-size: 1rem;
+}
+
+.confirmar p {
+  margin: var(--space-2) 0 var(--space-6);
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+.confirmar .acciones {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
 .error {
   margin: 0;
   font-size: 0.875rem;
@@ -142,8 +181,9 @@ button:focus-visible {
 
 .tarea {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-2) var(--space-4);
 }
 
 .tarea-texto {
