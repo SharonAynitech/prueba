@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import {
   createTask,
+  deleteTask,
   isValidTitle,
   loadTasks,
   saveTasks,
@@ -8,19 +9,28 @@ import {
   updateTaskTitle,
 } from './tasks.js';
 import TaskItem from './TaskItem.jsx';
+import ConfirmDelete from './ConfirmDelete.jsx';
 
 export default function App() {
   const [tasks, setTasks] = useState(() => loadTasks());
   const [titulo, setTitulo] = useState('');
   const [error, setError] = useState('');
-  const [saved, setSaved] = useState(false);
+  // Aviso temporal tras cada cambio; `id` reinicia el temporizador si se repite el texto.
+  const [notice, setNotice] = useState(null);
+  const [pendingDelete, setPendingDelete] = useState(null);
   const inputRef = useRef(null);
 
   useEffect(() => {
-    if (!saved) return undefined;
-    const timer = setTimeout(() => setSaved(false), 2000);
+    if (!notice) return undefined;
+    const timer = setTimeout(() => setNotice(null), 2000);
     return () => clearTimeout(timer);
-  }, [saved]);
+  }, [notice]);
+
+  function commit(next, text) {
+    saveTasks(next);
+    setTasks(next);
+    setNotice({ text, id: Date.now() });
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -29,26 +39,22 @@ export default function App() {
       inputRef.current?.focus();
       return;
     }
-    const next = [createTask(titulo), ...tasks];
-    saveTasks(next);
-    setTasks(next);
+    commit([createTask(titulo), ...tasks], 'Guardado');
     setTitulo('');
     setError('');
-    setSaved(true);
   }
 
   function handleRename(id, nuevoTitulo) {
-    const next = updateTaskTitle(tasks, id, nuevoTitulo);
-    saveTasks(next);
-    setTasks(next);
-    setSaved(true);
+    commit(updateTaskTitle(tasks, id, nuevoTitulo), 'Guardado');
   }
 
   function handleToggle(id) {
-    const next = toggleTaskCompleted(tasks, id);
-    saveTasks(next);
-    setTasks(next);
-    setSaved(true);
+    commit(toggleTaskCompleted(tasks, id), 'Guardado');
+  }
+
+  function handleDelete(id) {
+    commit(deleteTask(tasks, id), 'Eliminada');
+    setPendingDelete(null);
   }
 
   return (
@@ -92,14 +98,21 @@ export default function App() {
               task={task}
               onRename={handleRename}
               onToggle={handleToggle}
+              onDelete={setPendingDelete}
             />
           ))}
         </ul>
       </section>
 
       <p className="estado" role="status" aria-live="polite">
-        {saved ? 'Guardado' : ''}
+        {notice?.text ?? ''}
       </p>
+
+      <ConfirmDelete
+        task={pendingDelete}
+        onConfirm={handleDelete}
+        onCancel={() => setPendingDelete(null)}
+      />
     </main>
   );
 }

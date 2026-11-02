@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   createTask,
+  deleteTask,
   isValidTitle,
   loadTasks,
   saveTasks,
@@ -71,4 +72,11 @@ test('toggleTaskCompleted alterna solo la tarea indicada', () => {
   assert.equal(a.completada, false);
   const twice = toggleTaskCompleted(once, a.id);
   assert.deepEqual(twice, [a, b]);
+});
+
+test('deleteTask quita solo la tarea indicada', () => {
+  const [a, b] = [createTask('Uno'), createTask('Dos')];
+  const tasks = [a, b];
+  assert.deepEqual(deleteTask(tasks, a.id), [b]);
+  assert.deepEqual(tasks, [a, b]);
 });

@@ -30,6 +30,10 @@ export function toggleTaskCompleted(tasks, id) {
   return tasks.map((task) => (task.id === id ? { ...task, completada: !task.completada } : task));
 }
 
+export function deleteTask(tasks, id) {
+  return tasks.filter((task) => task.id !== id);
+}
+
 export function loadTasks(storage = globalThis.localStorage) {
   try {
     const parsed = JSON.parse(storage.getItem(STORAGE_KEY) ?? '[]');
