@@ -1,0 +1,41 @@
+// Modelo y persistencia local de tareas (localStorage, escritura síncrona).
+
+export const STORAGE_KEY = 'prueba.tareas';
+
+export function isValidTitle(titulo) {
+  return typeof titulo === 'string' && titulo.trim().length > 0;
+}
+
+function newId() {
+  if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID();
+  return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
+}
+
+export function createTask(titulo, now = new Date()) {
+  if (!isValidTitle(titulo)) throw new Error('El título es obligatorio');
+  return {
+    id: newId(),
+    titulo: titulo.trim(),
+    fecha_creacion: now.toISOString(),
+    completada: false,
+  };
+}
+
+export function loadTasks(storage = globalThis.localStorage) {
+  try {
+    const parsed = JSON.parse(storage.getItem(STORAGE_KEY) ?? '[]');
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+export function saveTasks(tasks, storage = globalThis.localStorage) {
+  storage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+}
+
+const dateFormat = new Intl.DateTimeFormat('es', { dateStyle: 'medium', timeStyle: 'short' });
+
+export function formatDate(iso) {
+  return dateFormat.format(new Date(iso));
+}

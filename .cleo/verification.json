@@ -6,17 +6,120 @@
         {
           "criterion_index": 0,
           "steps": [
-            { "action": "goto", "path": "/" },
-            { "action": "visible", "selector": "h1" },
-            { "action": "text", "selector": "h1", "value": "prueba" }
+            {
+              "action": "goto",
+              "path": "/"
+            },
+            {
+              "action": "visible",
+              "selector": "h1"
+            },
+            {
+              "action": "text",
+              "selector": "h1",
+              "value": "prueba"
+            }
           ]
         },
         {
           "criterion_index": 1,
           "steps": [
-            { "action": "goto", "path": "/" },
-            { "action": "count", "selector": "input[type=password]", "value": 0 },
-            { "action": "text", "selector": "h1", "value": "prueba" }
+            {
+              "action": "goto",
+              "path": "/"
+            },
+            {
+              "action": "count",
+              "selector": "input[type=password]",
+              "value": 0
+            },
+            {
+              "action": "text",
+              "selector": "h1",
+              "value": "prueba"
+            }
+          ]
+        }
+      ]
+    },
+    "US-02-1": {
+      "criteria_digest": "1db1aae8accbdae52613d04c91929eaa584a232dee7a7c5b4e3a71795ab0ca5f",
+      "cases": [
+        {
+          "criterion_index": 0,
+          "steps": [
+            {
+              "action": "goto",
+              "path": "/"
+            },
+            {
+              "action": "fill",
+              "selector": "input[name=titulo]",
+              "value": "Comprar leche"
+            },
+            {
+              "action": "click",
+              "selector": "button[type=submit]"
+            },
+            {
+              "action": "text",
+              "selector": "[data-testid=task-list]",
+              "value": "Comprar leche"
+            },
+            {
+              "action": "visible",
+              "selector": "[data-testid=task-item] [data-testid=task-date]"
+            },
+            {
+              "action": "goto",
+              "path": "/"
+            },
+            {
+              "action": "count",
+              "selector": "[data-testid=task-item]",
+              "value": 1
+            },
+            {
+              "action": "text",
+              "selector": "[data-testid=task-item] [data-testid=task-title]",
+              "value": "Comprar leche"
+            },
+            {
+              "action": "visible",
+              "selector": "[data-testid=task-item] [data-testid=task-date]"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "steps": [
+            {
+              "action": "goto",
+              "path": "/"
+            },
+            {
+              "action": "fill",
+              "selector": "input[name=titulo]",
+              "value": "   "
+            },
+            {
+              "action": "click",
+              "selector": "button[type=submit]"
+            },
+            {
+              "action": "text",
+              "selector": "[role=alert]",
+              "value": "El título es obligatorio"
+            },
+            {
+              "action": "count",
+              "selector": "[data-testid=task-item]",
+              "value": 0
+            },
+            {
+              "action": "visible",
+              "selector": "input[name=titulo]"
+            }
           ]
         }
       ]

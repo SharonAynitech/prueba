@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "start": "node server.js",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:unit": "node --test \"tests/unit/*.test.js\""
   },
   "dependencies": {
     "react": "18.3.1",
