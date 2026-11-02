@@ -123,6 +123,120 @@
           ]
         }
       ]
+    },
+    "US-02-2": {
+      "criteria_digest": "ba1392263a25cf948dd9d7e331cfd8203b0ae3b2d02a4d93022047b0ace55f5d",
+      "cases": [
+        {
+          "criterion_index": 0,
+          "steps": [
+            {
+              "action": "goto",
+              "path": "/"
+            },
+            {
+              "action": "fill",
+              "selector": "input[name=titulo]",
+              "value": "Comprar leche"
+            },
+            {
+              "action": "click",
+              "selector": "form.crear button[type=submit]"
+            },
+            {
+              "action": "text",
+              "selector": "[data-testid=task-title]",
+              "value": "Comprar leche"
+            },
+            {
+              "action": "click",
+              "selector": "[data-testid=task-item] [data-testid=task-edit]"
+            },
+            {
+              "action": "fill",
+              "selector": "input[name=titulo-edicion]",
+              "value": "Comprar pan"
+            },
+            {
+              "action": "click",
+              "selector": "[data-testid=task-save]"
+            },
+            {
+              "action": "text",
+              "selector": "[data-testid=task-title]",
+              "value": "Comprar pan"
+            },
+            {
+              "action": "goto",
+              "path": "/"
+            },
+            {
+              "action": "count",
+              "selector": "[data-testid=task-item]",
+              "value": 1
+            },
+            {
+              "action": "text",
+              "selector": "[data-testid=task-title]",
+              "value": "Comprar pan"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "steps": [
+            {
+              "action": "goto",
+              "path": "/"
+            },
+            {
+              "action": "fill",
+              "selector": "input[name=titulo]",
+              "value": "Comprar leche"
+            },
+            {
+              "action": "click",
+              "selector": "form.crear button[type=submit]"
+            },
+            {
+              "action": "text",
+              "selector": "[data-testid=task-title]",
+              "value": "Comprar leche"
+            },
+            {
+              "action": "click",
+              "selector": "[data-testid=task-item] [data-testid=task-edit]"
+            },
+            {
+              "action": "fill",
+              "selector": "input[name=titulo-edicion]",
+              "value": "   "
+            },
+            {
+              "action": "click",
+              "selector": "[data-testid=task-save]"
+            },
+            {
+              "action": "text",
+              "selector": "[data-testid=task-item] [role=alert]",
+              "value": "El título es obligatorio"
+            },
+            {
+              "action": "visible",
+              "selector": "input[name=titulo-edicion]"
+            },
+            {
+              "action": "goto",
+              "path": "/"
+            },
+            {
+              "action": "text",
+              "selector": "[data-testid=task-title]",
+              "value": "Comprar leche"
+            }
+          ]
+        }
+      ]
     }
   }
 }

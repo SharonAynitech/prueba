@@ -55,7 +55,8 @@ h2 {
   color: var(--color-text-secondary);
 }
 
-.crear-fila {
+.crear-fila,
+.edicion .fila {
   display: flex;
   gap: var(--space-2);
 }
@@ -91,6 +92,20 @@ button:hover {
   background: var(--color-accent-hover);
 }
 
+button.secundario {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-accent);
+  background: var(--color-bg);
+  border-color: var(--color-border);
+}
+
+button.secundario:hover {
+  color: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+}
+
 input:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--color-focus);
@@ -119,12 +134,29 @@ button:focus-visible {
 }
 
 .tareas li {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
   padding: var(--space-4) var(--space-6);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
+}
+
+.tarea {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.tarea-texto {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.edicion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
 }
 
 .tareas .titulo {

@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { createTask, isValidTitle, loadTasks, saveTasks } from '../../src/tasks.js';
+import { createTask, isValidTitle, loadTasks, saveTasks, updateTaskTitle } from '../../src/tasks.js';
 
 function memoryStorage() {
   const data = new Map();
@@ -42,4 +42,17 @@ test('loadTasks devuelve lista vacía con datos ausentes o corruptos', () => {
   assert.deepEqual(loadTasks(storage), []);
   storage.setItem('prueba.tareas', '{no es json');
   assert.deepEqual(loadTasks(storage), []);
+});
+
+test('updateTaskTitle cambia solo el título de la tarea indicada', () => {
+  const [a, b] = [createTask('Uno'), createTask('Dos')];
+  const next = updateTaskTitle([a, b], b.id, '  Tres  ');
+  assert.deepEqual(next, [a, { ...b, titulo: 'Tres' }]);
+  assert.equal(b.titulo, 'Dos');
+});
+
+test('updateTaskTitle lanza con título vacío y no modifica nada', () => {
+  const tasks = [createTask('Uno')];
+  assert.throws(() => updateTaskTitle(tasks, tasks[0].id, '   '));
+  assert.equal(tasks[0].titulo, 'Uno');
 });

@@ -21,6 +21,11 @@ export function createTask(titulo, now = new Date()) {
   };
 }
 
+export function updateTaskTitle(tasks, id, titulo) {
+  if (!isValidTitle(titulo)) throw new Error('El título es obligatorio');
+  return tasks.map((task) => (task.id === id ? { ...task, titulo: titulo.trim() } : task));
+}
+
 export function loadTasks(storage = globalThis.localStorage) {
   try {
     const parsed = JSON.parse(storage.getItem(STORAGE_KEY) ?? '[]');
